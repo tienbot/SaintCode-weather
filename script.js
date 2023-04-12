@@ -9,6 +9,12 @@ const success = function (data) {
 
 const error = function () {
     console.error("ERROR")
+    // получить ip
+    fetch('https://api.ipify.org/?format=json')
+        .then(response => response.json())
+        .then(data => getIP(data))
+        .catch(console.log('IP not found...'))
+
     chooseCityDiv.classList.add('d-none')
     weatherDiv.classList.add('d-none')
     errorDiv.classList.remove('d-none')
@@ -29,16 +35,10 @@ let errorDiv = document.querySelector('.errorDiv')
 inputCity.addEventListener('change', ()=>{
     cityName = inputCity.value
     inputCity.value = ''
-    tempResult = city()
+    tempResult = city(cityName)
     tempResult.then(data => dataAtSite(data))
-    // if(datа.cod === '404'){
-    //     errorDiv.classList.remove('d-none')
-    //     weatherDiv.classList.add('d-none')
-    //     chooseCityDiv.classList.add('d-none')
-    // } else {
-        chooseCityDiv.classList.add('d-none')
-        weatherDiv.classList.remove('d-none')
-    // }
+    chooseCityDiv.classList.add('d-none')
+    weatherDiv.classList.remove('d-none')
 })
 
 tryAgain.addEventListener('click', ()=>{
@@ -51,10 +51,9 @@ tryAgain.addEventListener('click', ()=>{
     tempResult.then(data => dataAtSite(data))
 })
 
-async function city(){
+async function city(cityName){
     const geo = await fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=metric&lang=ru&appid=${api}`)
     const data = await geo.json()
-    console.log(data.cod)
     //если введен несуществующий город
     if(data.cod === '404'){
         errorDiv.classList.remove('d-none')
@@ -95,7 +94,7 @@ function dataAtSite(obj) {
     
 
     h1.innerHTML=`${cel}℃`
-    //склонение города в зависимости от последней буквы
+    //склонение названия города, в зависимости от последней буквы
     if (city[city.length-1] == 'а'){
         city=city.split('')
         city.pop('а')
@@ -109,6 +108,14 @@ function dataAtSite(obj) {
         city = city.join('')
     }
     p.innerHTML=`${weather} в ${city}`
-
     weatherDiv.append(img, h1, p, button)
+}
+
+function getIP(json) {
+    console.log("My public IP address is: ", json.ip);
+    fetch(`https://geo.ipify.org/api/v2/country?apiKey=at_wEUr3KA826hpiltp2wrwhQIagaHxK&ipAddress=${json.ip}`)
+        .then(response => response.json())
+        .then(data => console.log(data))
+        // .then(data => console.log(data.location.region))
+        // .then(data => dataAtSite(data.location.region))
 }
