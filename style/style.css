@@ -44,7 +44,7 @@ body {
   color: rgba(255, 255, 255, 0.8);
   margin-bottom: 36px;
 }
-.container__main button {
+.container__main .changeCity {
   font-family: "Muli", sans-serif;
   font-size: 17px;
   line-height: 28px;
@@ -53,7 +53,7 @@ body {
   background-color: transparent;
   border: none;
 }
-.container__main button:hover {
+.container__main .changeCity:hover {
   cursor: pointer;
 }
 .container__bottom {
@@ -67,12 +67,12 @@ body {
   color: rgba(255, 255, 255, 0.5);
 }
 
-.chooseCity {
+.chooseCityDiv {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.chooseCity input {
+.chooseCityDiv input {
   min-width: 326px;
   width: 100%;
   background-color: transparent;
@@ -85,14 +85,15 @@ body {
   text-align: center;
   margin-bottom: 36px;
 }
-.chooseCity input::placeholder {
+.chooseCityDiv input::placeholder {
   color: rgba(255, 255, 255, 0.7);
   text-align: center;
 }
-.chooseCity input:focus-visible {
+.chooseCityDiv input:focus-visible {
   outline: none;
 }
-.chooseCity button {
+
+.btn {
   width: 140px;
   height: 48px;
   background: #FFFFFF;
@@ -102,6 +103,26 @@ body {
   line-height: 36px;
   color: #4C01E0;
   text-decoration: none;
+  border: none;
+}
+.btn:hover {
+  cursor: pointer;
+}
+
+.errorDiv {
+  font-weight: 400;
+}
+.errorDiv p {
+  font-size: 20px;
+  line-height: 36px;
+  color: #FFFFFF;
+  margin-bottom: 0;
+}
+.errorDiv .info {
+  font-size: 12px;
+  line-height: 15px;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 57px;
 }
 
 .d-none {

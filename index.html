@@ -17,11 +17,16 @@
             <div class="container__top">
                 <p>Weather</p>
             </div>
-            <div class="container__main weather ">
+            <div class="container__main weatherDiv">
             </div>
-            <div class="container__main chooseCity d-none">
-                <input type="text" placeholder="Type your city here" id="inputCity">
-                <button for="inputCity">Find</button>
+            <div class="container__main chooseCityDiv d-none">
+                <input type="text" placeholder="Введите свой город" id="inputCity">
+                <button class='btn' for="inputCity">Найти</button>
+            </div>
+            <div class="container__main errorDiv d-none">
+                <p>Упс. Что-то пошло не так</p>
+                <p class="info">Error info</p>
+                <button class='btn' for="inputCity" id="tryAgain">Еще раз</button>
             </div>
             <div class="container__bottom">
                 <p>With ❤️ by Alex</p>
