@@ -85,7 +85,7 @@ function dataAtSite(obj) {
     weather[0] = weather[0].toUpperCase()
     weather = weather.join('')
     const button = document.createElement('button')
-    button.innerHTML='Change city'
+    button.innerHTML='Изменить город'
     button.setAttribute("class", 'changeCity')
     button.addEventListener('click', ()=>{
         chooseCityDiv.classList.remove('d-none')
@@ -95,13 +95,19 @@ function dataAtSite(obj) {
 
     h1.innerHTML=`${cel}℃`
     //склонение названия города, в зависимости от последней буквы
-    if (city[city.length-1] == 'а'){
+    let letter = city[city.length-1]
+    if (letter == 'а' || letter == 'я' || letter == 'ь' || letter == 'й'){
         city=city.split('')
-        city.pop('а')
+        city.pop(letter)
         city.push('е')
         city = city.join('')
-    } else if(city[city.length-1] == 'и'){
+    } else if (city == 'бали' || city == 'Бали' || letter == 'у' || letter == 'е' || letter == 'о' || letter == 'э'){
         city=city
+    } else if (letter == 'и' || letter == 'ы'){
+        city=city.split('')
+        city.pop(letter)
+        city.push('ах')
+        city = city.join('')
     } else {
         city=city.split('')
         city.push('е')
@@ -115,7 +121,7 @@ function getIP(json) {
     console.log("My public IP address is: ", json.ip);
     fetch(`https://geo.ipify.org/api/v2/country?apiKey=at_wEUr3KA826hpiltp2wrwhQIagaHxK&ipAddress=${json.ip}`)
         .then(response => response.json())
-        .then(data => console.log(data))
+        // .then(data => console.log(data))
         // .then(data => console.log(data.location.region))
-        // .then(data => dataAtSite(data.location.region))
+        .then(data => dataAtSite(data.location.region))
 }
