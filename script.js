@@ -33,7 +33,7 @@ let errorDiv = document.querySelector('.errorDiv').classList
 
 //ввести название города
 inputCity.addEventListener('change', ()=>{
-    cityName = inputCity.value
+    cityName = inputCity.value.trim()
     inputCity.value = ''
     tempResult = city(cityName)
 })
